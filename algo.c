@@ -279,3 +279,111 @@ void shuffle(int *a,int n)
 		swap(&a[i],&a[shuffler]);
 	}
 }
+static void merge(int* a,int low,int high,int *aux)
+{
+	int mid=(low+high)/2;int list_a,list_b;
+    int k=low;
+    for(list_a=low,list_b=mid+1;list_a<=mid&&list_b<=high;)
+    {
+        if(a[list_a] > a[list_b])
+        {
+            aux[k++]=a[list_b++];
+        }
+        else
+        {
+            aux[k++]=a[list_a++];
+        }
+    }
+    while(list_a<=mid)
+    {
+       aux[k++]=a[list_a++];
+    }
+    while(list_b<=high)
+    {
+        aux[k++]=a[list_b++];
+    }
+    for(int h=low;h<=high;h++)
+    {
+        a[h]=aux[h];
+    }
+}
+static void MERGESORT(int *a,int low,int high,int* aux)
+{
+	if(low < high)
+	{
+		int mid=(low+high)/2;
+	    MERGESORT(a,low,mid,aux);
+	    MERGESORT(a,mid+1,high,aux);
+	    merge(a,low,high,aux);
+	}
+
+}
+void merge_sort(int *a,int n)
+{ 
+	int aux[n];
+	MERGESORT(a,0,n-1,aux);
+}
+static int partitioner(int*a,int low,int high)
+{
+	
+	int pivot=a[low];
+	int left=low+1,right=high;
+	while(left <= right)
+	{
+		
+		while(left<=right && a[left] < pivot)
+		{
+			left++;
+			
+		}
+		while(left<=right && a[right] > pivot)
+		{
+			right--;
+			
+		}
+		if(left < right)
+		{
+			swap(&a[left],&a[right]);
+			left++;right--;
+	    }
+
+	}
+	swap(&a[low],&a[right]);
+	return right;
+} 
+static void quick_sort(int*a ,int l,int h)
+{
+	if(l<h)
+	{
+		int res=partitioner(a,l,h);
+		quick_sort(a,l,res-1);
+		quick_sort(a,res+1,h);
+	}
+}
+void quicksort(int *a,int n)
+{
+		quick_sort(a,0,n-1);
+}
+int binsearch(int* a,int n,int key)
+{
+	int l=0;
+	int h=n-1;
+	int mid;
+	while(l<h)
+	{
+		mid=(l+h)/2;
+		if(a[mid]==key)
+		{
+			return mid;
+		}
+		else if(a[mid] > key)
+		{
+			h=mid-1;
+		}
+		else
+		{
+			l=mid+1;
+		}
+	}
+	return -1;
+}
