@@ -78,3 +78,12 @@ void insertionsort(int* a,int n);
 
 void shuffle(int *a,int n);
 //shuffles the contents of the array ,without loss of data.
+
+void merge_sort(int *a,int n);
+//sorts the input using divide and conquer,(not in-place sort)
+//nlogn
+void quicksort(int *a,int n);
+//sorts the input using divide and conquer,( in-place sort)
+//nlogn
+int binsearch(int* a,int n,int key);
+//logn search ,analagous to searching in a bin tree
