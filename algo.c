@@ -387,3 +387,33 @@ int binsearch(int* a,int n,int key)
 	}
 	return -1;
 }
+static void heapify(int* a,int parent,int n)
+{
+	int l_child=2*parent+1;
+	int r_child=l_child+1;
+	int max=parent;
+	if(l_child<n && a[l_child] > a[max])
+		max=l_child;
+	if(r_child<n && a[r_child] > a[max])
+		max=r_child;
+	if(max==parent)
+		return;
+	else
+    {
+    	swap(&a[max],&a[parent]);
+    	parent=max;
+    	heapify(a,parent,n);
+    }
+}
+void heapsort(int *a,int n)
+{
+	for(int parent=n/2-1;parent>=0;parent--)
+	{
+		heapify(a,parent,n);
+	}
+	for(int swapper=n-1;swapper>0;swapper--)
+	{
+		swap(&a[swapper],&a[0]);
+		heapify(a,0,swapper);
+	}
+}
