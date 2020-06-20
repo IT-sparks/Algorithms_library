@@ -87,3 +87,5 @@ void quicksort(int *a,int n);
 //nlogn
 int binsearch(int* a,int n,int key);
 //logn search ,analagous to searching in a bin tree
+void heapsort(int *a,int n);
+//transform and conquer
